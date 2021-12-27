@@ -1,0 +1,5 @@
+TZ: 'Australia/Sydney'
+INIT_PACKAGES: ['build-essential','curl']
+DEFAULT_USER: "default"
+GIT_USERNAME: "Default User"
+GIT_EMAIL: "default@user.com"

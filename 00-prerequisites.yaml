@@ -1,0 +1,8 @@
+## 00-prerequisites.yaml
+## ansible-playbook 00-prerequisites.yaml -i inventory/hosts.ini
+---
+- hosts: development
+  gather_facts: no
+  become: yes
+  roles:
+    - role: prerequisites

@@ -1,0 +1,13 @@
+- name: Install git
+  ansible.builtin.apt: 
+    name: git
+    state: latest
+    autoclean: yes
+    autoremove: yes
+
+- name: Copy gitconfig
+  ansible.builtin.template:
+    src: gitconfig.j2
+    dest: /home/{{ DEFAULT_USER }}/.gitconfig
+    owner: "{{ DEFAULT_USER }}"
+    group: "{{ DEFAULT_USER }}"

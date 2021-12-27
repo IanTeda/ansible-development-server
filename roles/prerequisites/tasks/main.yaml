@@ -1,0 +1,11 @@
+- name: Configure Ubuntu Server
+  import_tasks: config.yaml
+
+- name: Configure SSH Access
+  import_tasks: ssh.yaml
+
+- name: Setup packages
+  import_tasks: packages.yaml
+
+- name: Setup git
+  import_tasks: git.yaml
