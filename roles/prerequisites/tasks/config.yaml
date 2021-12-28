@@ -1,3 +1,11 @@
 - name: Set time zone for server
   community.general.timezone:
     name: "{{ TZ }}"
+
+- name: Create downloads directory
+  ansible.builtin.file:
+    path: "/home/{{ DEFAULT_USER }}/Downloads/"
+    state: directory
+    owner: "{{ DEFAULT_USER }}"
+    group: "{{ DEFAULT_USER }}"
+    mode: "u=rwx,g=rx,o=rx"

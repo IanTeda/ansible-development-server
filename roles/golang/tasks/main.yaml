@@ -1,0 +1,24 @@
+## https://go.dev/doc/install
+
+- name: Remove any existing go binaries in /usr/local
+  ansible.builtin.command: rm -rf /usr/local/go
+
+## https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
+- name: Download x86_64 Go binary into /usr/local
+  when: ansible_architecture == 'x86_64'
+  ansible.builtin.unarchive:
+    src: "https://go.dev/dl/{{ GO_VERSION }}.linux-amd64.tar.gz"
+    dest: "/usr/local"
+    remote_src: yes
+
+# ## https://go.dev/dl/go1.17.5.linux-arm64.tar.gz
+- name: Download amd64 Go binary
+  when: ansible_architecture == "aarch64"
+  ansible.builtin.unarchive:
+    src: "https://go.dev/dl/{{ GO_VERSION }}.linux-amd64.tar.gz"
+    dest: "/usr/local"
+    remote_src: yes
+
+- name: Add /usr/local/go/bin to the PATH environment variable
+  ansible.builtin.shell: |
+    export PATH=$PATH:/usr/local/go/bin
