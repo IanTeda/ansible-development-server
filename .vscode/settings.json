@@ -2,6 +2,12 @@
     "cSpell.words": [
         "aarch",
         "armv",
-        "autoclean"
+        "autoclean",
+        "autoremove",
+        "lineinfile",
+        "NOPASSWD",
+        "OPENVSCODE",
+        "playbook",
+        "timezone"
     ]
 }

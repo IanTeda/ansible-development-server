@@ -1,5 +1,9 @@
 TZ: 'Australia/Sydney'
-INIT_PACKAGES: ['build-essential','curl']
+ANSIBLE_USER: "ansible"
+INIT_PACKAGES: [ 'bash', 'curl', 'wget', 'net-tools', 'build-essential']
 DEFAULT_USER: "default"
 GIT_USERNAME: "Default User"
 GIT_EMAIL: "default@user.com"
+GO_VERSION: "go1.17.5"
+OPENVSCODE_SERVER_VERSION: "v1.63.2"
+VSCODE_LOCATION: "/usr/local/openvscode"
