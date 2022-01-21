@@ -1,4 +1,3 @@
----
 - name: Allow ansible user to execute without password
   ansible.builtin.lineinfile:
     path: /etc/sudoers
@@ -7,6 +6,20 @@
     line: "{{ ANSIBLE_USER }} ALL=(ALL) NOPASSWD: ALL"
     validate: "visudo -cf %s"
 
-# Remove password from ansible account
 - name: Remove ansible account password login
   ansible.builtin.command: "passwd -d {{ ANSIBLE_USER }}"
+
+- name: Add default user
+  ansible.builtin.user:
+    name: "{{ DEFAULT_USER }}"
+    password: "{{ 'DEFAULT_PASSWORD' | password_hash('sha512') }}"
+    update_password: on_create
+    shell: /bin/bash
+    append: yes
+    groups: sudo
+
+- name: Set authorized key for default user
+  ansible.posix.authorized_key:
+    user: "{{ DEFAULT_USER }}"
+    state: present
+    key: "{{ lookup('file', 'id_rsa.pub') }}"
