@@ -1,7 +1,8 @@
 ## 01-rust.yaml
 ## ansible-playbook 01-rust.yaml -i inventory/hosts.ini
 ---
-- hosts: development
+- name: Rust
+  hosts: development
   gather_facts: no
   become: yes
   roles:

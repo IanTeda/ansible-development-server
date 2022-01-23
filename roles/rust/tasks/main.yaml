@@ -9,13 +9,13 @@
     autoremove: yes
 
 - name: "Install Rust toolchain"
-  shell: "curl https://sh.rustup.rs -sSf | /bin/zsh -s -- -y"
+  ansible.builtin.shell: "curl https://sh.rustup.rs -sSf | /bin/zsh -s -- -y"
   changed_when: false
   become: yes
   become_user: "{{ DEFAULT_USER }}"
 
 - name: "Verify Rust install"
-  shell: "rustup --version"
+  ansible.builtin.shell: "rustup --version"
   changed_when: false
   become: yes
   become_user: "{{ DEFAULT_USER }}"
