@@ -1,7 +1,8 @@
 ## 00-prerequisites.yaml
 ## ansible-playbook 00-prerequisites.yaml -i inventory/hosts.ini --ask-become-pass
 ---
-- hosts: development
+- name: Prerequisites
+  hosts: development
   gather_facts: no
   become: yes
   vars_prompt:

@@ -19,6 +19,6 @@
 # - name: Customise Bash prompt
 #   import_tasks: bash.yaml
 
-# - name: Install Oh My Zsh
-#   import_tasks: oh_my_ssh.yaml
+- name: Install Oh My Zsh
+  import_tasks: oh_my_zsh.yaml
 
