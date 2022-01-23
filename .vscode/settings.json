@@ -4,10 +4,21 @@
         "armv",
         "autoclean",
         "autoremove",
+        "blkid",
+        "chsh",
+        "fstype",
         "lineinfile",
+        "noatime",
+        "nodiratime",
+        "noexec",
+        "nofail",
         "NOPASSWD",
+        "nosuid",
         "OPENVSCODE",
+        "passno",
         "playbook",
+        "posix",
+        "powerline",
         "timezone"
     ]
 }

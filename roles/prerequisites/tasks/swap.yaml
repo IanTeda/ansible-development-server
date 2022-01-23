@@ -1,0 +1,92 @@
+# - name: Turn swap off
+#   shell: |
+#     sudo dphys-swapfile swapoff
+
+# - name: Increase swap size
+  
+
+
+# - name: "Check if {{ swap_file }} exists"
+#   stat:
+#     path: "{{ swap_file }}"
+#   register: swap
+
+# - name: "Create swap file {{ swap_file }}"
+#   when: not swap.stat.exists
+#   command: 'fallocate -l 8G {{ swap_file }}'
+
+# - name: "Set permissions on {{ swap_file }}"
+#   file:
+#     path: '{{ swap_file }}'
+#     mode: "600"
+
+# - name: "Check if {{ swap_file }} is mounted"
+#   command: "swapon --show | grep {{ swap_file }}"
+#   register: swapon
+
+# - name: "Mark {{ swap_file }} as swap space"
+#   register: space
+#   command: "mkswap {{ swap_file }}"
+#   # # when: "'/media/usb-external/swapfile' not in swapon.stdout"
+#   # shell: | 
+#   #   "mkswap {{ swap_file }}"
+#   # failed_when: 
+#   #   - /media/usb-external/swapfile is mounted
+#   #   - "space.rc != 1"
+#   changed_when: 
+#     - "'mkswap: error: /media/usb-external/swapfile is mounted; will not make swapspace' in space.stderr"
+#     - space.rc == 1
+
+# - name: Enable swap file
+#   become: yes
+#   shell: |
+#     "swapon {{ swap_file }}"
+
+# - name: "Mount {{ swap_file }}"
+#   ansible.posix.mount:
+#     src: "{{ swap_file }}"
+#     path: "none"
+#     fstype: swap
+#     opts: sw
+#     dump: '0'
+#     passno: '0'
+#     state: present
+
+# - name: Enable swap
+#   shell: |
+#     tee -a /etc/fstab
+
+# - name: Install dphys packages
+#   apt: 
+#     name: dphys-swapfile
+#     state: latest
+#     autoclean: yes
+#     autoremove: yes
+
+# - name: "Set swapfile location to {{ ext_hardrive }}"
+#   lineinfile:
+#     path: /etc/dphys-swapfile
+#     regexp: '^CONF_SWAPFILE={{ swap_file }}'
+#     insertafter: '^#CONF_SWAPFILE='
+#     line: "CONF_SWAPFILE={{ swap_file }}"
+#     create: yes
+
+# - name: "Recreate swap file on {{ ext_hardrive }}"
+#   shell: |
+#     dphys-swapfile install
+
+
+
+# - name: Install dphys-swapfile to set swap file to external drive
+#   ansible.builtin.apt: 
+#     name: dphys-swapfile 
+#     update_cache: yes 
+#     state: latest
+
+# - name: "Set swap file location to {{ SSD_MOUNT_POINT }}/swapfile"
+#   ansible.builtin.lineinfile:
+#     path: /etc/dphys-swapfile
+#     state: present
+#     regexp: "^CONF_SWAPFILE="
+#     line: "CONF_SWAPFILE={{ SSD_MOUNT_POINT }}/swapfile"
+#   notify: swapfile install

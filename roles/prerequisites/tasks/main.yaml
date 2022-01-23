@@ -1,11 +1,24 @@
 - name: Configure Ubuntu Server
   import_tasks: config.yaml
 
-- name: Configure SSH Access
-  import_tasks: ssh.yaml
-
 - name: Setup packages
   import_tasks: packages.yaml
 
-- name: Setup git
-  import_tasks: git.yaml
+- name: Configure SSH Access
+  import_tasks: ssh.yaml
+
+- name: Setup firewall
+  import_tasks: firewall.yaml
+
+- name: Setup default user
+  import_tasks: default_user.yaml
+
+- name: Mount USB Stick
+  import_tasks: usb_stick.yaml
+
+# - name: Customise Bash prompt
+#   import_tasks: bash.yaml
+
+# - name: Install Oh My Zsh
+#   import_tasks: oh_my_ssh.yaml
+

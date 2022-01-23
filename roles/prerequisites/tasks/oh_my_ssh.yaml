@@ -1,0 +1,31 @@
+- name: Install packages for Oh My SSH
+  ansible.builtin.apt: 
+    name: 
+      - "zsh"
+      - "fonts-powerline"
+    state: latest
+    autoclean: yes
+    autoremove: yes
+
+- name: Change default shell to Zsh
+  become: Yes
+  become_user: "{{ DEFAULT_USER }}"
+  # become_method: su
+  # become_flags: '-s /bin/sh'
+  ansible.builtin.shell: |
+    chsh -s $(which zsh)
+
+- name: Download Oh My Zsh install script
+  ansible.builtin.uri:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /home/{{ DEFAULT_USER }}
+    owner: "{{ DEFAULT_USER }}"
+    group: "{{ DEFAULT_USER }}"
+
+- name: Run Oh My Zsh install script
+  become: Yes
+  become_user: "{{ DEFAULT_USER }}"
+  # become_method: su
+  # become_flags: '-s /bin/sh'
+  ansible.builtin.shell: |
+    "sh /users/{{ DEFAULT_USER }}/install.sh"

@@ -4,11 +4,5 @@
 - hosts: development
   gather_facts: no
   become: yes
-  vars_prompt:
-    - name: DEFAULT_PASSWORD
-      prompt: "Enter default user password"
-      private: yes
-      default: "password"
-
   roles:
     - role: ansible

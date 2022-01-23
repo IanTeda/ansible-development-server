@@ -1,0 +1,20 @@
+# - name: Enable color prompt
+#   lineinfile:
+#     path: "/home/{{ item }}/.bashrc"
+#     regexp: '^force_color_prompt=yes'
+#     line: "force_color_prompt=yes"
+#     insertafter: '^#force_color_prompt=yes'
+#     create: yes
+#   loop:
+#     - "{{ DEFAULT_USER }}"
+#     - "{{ ansible_user }}"
+
+- name: Always use the -la option
+  lineinfile:
+    path: "/home/{{ item }}/.bashrc"
+    regexp: "^alias ls='ls -la --color=always'"
+    line: "alias ls='ls -la --color=always'"
+    create: yes
+  loop:
+    - "{{ DEFAULT_USER }}"
+    - "{{ ansible_user }}"

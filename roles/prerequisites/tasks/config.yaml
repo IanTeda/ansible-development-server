@@ -2,10 +2,15 @@
   community.general.timezone:
     name: "{{ TZ }}"
 
-- name: Create downloads directory
-  ansible.builtin.file:
-    path: "/home/{{ DEFAULT_USER }}/Downloads/"
-    state: directory
-    owner: "{{ DEFAULT_USER }}"
-    group: "{{ DEFAULT_USER }}"
-    mode: "u=rwx,g=rx,o=rx"
+- name: "Set hostname {{ hostname }} in /etc/hostname"
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+  notify: server reboot
+    
+- name: "Add hostname {{ hostname }} in /etc/hosts"
+  ansible.builtin.lineinfile:
+    path: '/etc/hosts'
+    state: present
+    regexp: '^127\.0\.0\.1[ \t]+localhost'
+    line: '127.0.0.1 localhost {{ hostname }}'
+  notify: server reboot

@@ -1,0 +1,35 @@
+- name: Add default user
+  ansible.builtin.user:
+    name: "{{ DEFAULT_USER }}"
+    password: "{{ 'DEFAULT_PASSWORD' | password_hash('sha512') }}"
+    update_password: on_create
+    shell: /bin/bash
+    append: yes
+    groups: sudo
+
+- name: Set authorized key for default user
+  authorized_key:
+    user: "{{ DEFAULT_USER }}"
+    state: present
+    key: "{{ lookup('file', 'id_rsa.pub') }}"
+
+- name: Copy gitconfig
+  ansible.builtin.template:
+    src: gitconfig.j2
+    dest: /home/{{ DEFAULT_USER }}/.gitconfig
+    owner: "{{ DEFAULT_USER }}"
+    group: "{{ DEFAULT_USER }}"
+
+# - name: Set git global name for users
+#   remote_user: '{{ DEFAULT_USER }}'
+#   community.general.git_config:
+#     name: user.name
+#     value: "{{ GIT_USERNAME }}"
+#     scope: global
+
+# - name: Set git global email for user
+#   remote_user: '{{ DEFAULT_USER }}'
+#   community.general.git_config:
+#     name: user.email
+#     value: "{{ GIT_EMAIL }}"
+#     scope: global
