@@ -1,0 +1,23 @@
+- name: Install Rust prerequisites
+  ansible.builtin.apt: 
+    name: 
+      - build-essential
+      - make 
+      - gcc
+    state: latest
+    autoclean: yes
+    autoremove: yes
+
+- name: "Install Rust toolchain"
+  shell: "curl https://sh.rustup.rs -sSf | /bin/zsh -s -- -y"
+  changed_when: false
+  become: yes
+  become_user: "{{ DEFAULT_USER }}"
+
+- name: "Verify Rust install"
+  shell: "rustup --version"
+  changed_when: false
+  become: yes
+  become_user: "{{ DEFAULT_USER }}"
+  args:
+    executable: /bin/zsh

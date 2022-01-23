@@ -16,9 +16,12 @@
         "nosuid",
         "OPENVSCODE",
         "passno",
+        "pipefail",
         "playbook",
         "posix",
         "powerline",
-        "timezone"
+        "rustup",
+        "timezone",
+        "tlsv"
     ]
 }
